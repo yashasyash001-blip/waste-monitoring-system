@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     pkg-config \
     libcurl4-openssl-dev \
-    && pecl install mongodb \
+    && pecl install mongodb-1.19.3 \
     && docker-php-ext-enable mongodb
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
