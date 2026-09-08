@@ -235,15 +235,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         }
 
-catch (Exception $e) {
+catch (\Throwable $e) {
 
-    error_log("REGISTRATION ERROR: " . $e->getMessage());
+    error_log(
+        "REGISTRATION ERROR: " .
+        $e->getMessage()
+    );
 
     $message =
-        "Unable to register. Please try again.";
+        "Registration error: " .
+        $e->getMessage();
 
     $message_type = "error";
-
 }
 
     }
