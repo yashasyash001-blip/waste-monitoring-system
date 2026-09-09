@@ -12,10 +12,19 @@ try {
 
     $client = new MongoDB\Client($uri);
 
+    // Force MongoDB connection/authentication now
+    $client->selectDatabase("waste_monitoring_system")
+           ->command(["ping" => 1]);
+
     $database = $client->selectDatabase("waste_monitoring_system");
 
-} catch (Exception $e) {
-    die("MongoDB connection failed: " . $e->getMessage());
+} catch (\Throwable $e) {
+
+    error_log("MONGODB CONNECTION ERROR: " . $e->getMessage());
+
+    die(
+        "MongoDB connection failed. Please check the MongoDB credentials and connection string."
+    );
 }
 
 ?>
